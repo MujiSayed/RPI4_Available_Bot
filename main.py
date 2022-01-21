@@ -37,5 +37,7 @@ def discord_push():
     else:
         print("Payload delivered successfully, code {}.".format(result.status_code))
 
+
+if __name__ == '__main__':
 rpi8gb()
 discord_push()
