@@ -1,7 +1,7 @@
 import requests
 import scraper
 import email_notif
-   
+import config as conf
 
 product_found():
 
@@ -9,11 +9,11 @@ product_found():
 
 
 def discord_push():
-    url = "https://discord.com/api/webhooks/933903313655709796/C3TSR1osoETvWeBERKakBraRyh0XBXZjsnwdVNGGVhfyvfCU_6ZehDO_hxlHUU5lpHlO" 
-    product_found = rpi8gb()
+    url = discord_webhook.conf 
+    #product_found = rpi8gb()
     data = {
     "content" : str(product_found),
-    "username" : "BasedMeezus"
+    "username" : discord_user.conf
     }
 
 
