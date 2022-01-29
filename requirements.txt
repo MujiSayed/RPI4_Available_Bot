@@ -1,0 +1,4 @@
+bs4==0.0.1
+html5lib==1.1
+mailer==0.8.1
+requests==2.22.0
