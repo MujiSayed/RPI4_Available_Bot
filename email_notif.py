@@ -1,10 +1,10 @@
 import smtplib
 import config as conf
-
+import main
 
 sent_from = conf.email_user
 to = conf.to_address
-subject = 'OMG Super Important Message 546464'
+subject = f"{main.product_found}"
 body = "Hey, what's up?\n\n- You"
 
 email_text = """\
@@ -25,3 +25,5 @@ try:
     print('Email sent!')
 except:
     print('Something went wrong...')
+
+return
