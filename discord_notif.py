@@ -17,5 +17,5 @@ def discord_push(product_url, rpi_name):
     except requests.exceptions.HTTPError as err:
         print(err)
     else:
-        print("Payload delivered successfully, code {}.".format(result.status_code))
+        print("Message delievered to Discord Successfully, code {}.".format(result.status_code))
 

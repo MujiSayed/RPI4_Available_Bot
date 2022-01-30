@@ -19,9 +19,9 @@ def rpi1gb_isavailable():
     beautified = soup_html5lib.body.find_all(id="meta0_option_4295")
 
     if "Out of stock" not in beautified:
-        return True
-    else:
         return False
+    else:
+        return True
 
 
 def rpi2gb_isavailable():
@@ -34,9 +34,9 @@ def rpi2gb_isavailable():
     beautified = soup_html5lib.body.find_all(id="meta0_option_4292")
 
     if "Out of stock" not in beautified:
-        return True
-    else:
         return False
+    else:
+        return True
 
 
 def rpi4gb_isavailable():
@@ -49,9 +49,9 @@ def rpi4gb_isavailable():
     beautified = soup_html5lib.body.find_all(id="meta0_option_4296")
 
     if "Out of stock" not in beautified:
-        return True
-    else:
         return False
+    else:
+        return True
 
 
 def rpi8gb_isavailable():
