@@ -1,9 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
-
+from discord_notif import discord_push
+from email_notif import email_notif
 
 baseurl = "https://www.adafruit.com/product/"
-
+RPI1GB_URL = f"{baseurl}4295"
+RPI2GB_URL = f"{baseurl}4292"
+RPI4GB_URL = f"{baseurl}4296"
+RPI8GB_URL = f"{baseurl}4564"
 
 def rpi1gb():
     
@@ -15,9 +19,9 @@ def rpi1gb():
     beautified = soup_html5lib.body.find_all(id="meta0_option_4295")
 
     if "Out of stock" not in beautified:
-        return "RPI 1 GB is out of stock"
+        return False
     else:
-        return f"RPI 1 GB Available at {url}"
+        return True
 
 
 def rpi2gb():
@@ -30,9 +34,9 @@ def rpi2gb():
     beautified = soup_html5lib.body.find_all(id="meta0_option_4292")
 
     if "Out of stock" not in beautified:
-        return "RPI 2 GB is out of stock"
+        return False
     else:
-        return f"RPI 2 GB Available at {url}"
+        return True
 
 
 def rpi4gb():
@@ -45,14 +49,14 @@ def rpi4gb():
     beautified = soup_html5lib.body.find_all(id="meta0_option_4296")
 
     if "Out of stock" not in beautified:
-        return "RPI 4 GB is out of stock"
+        return False
     else:
-        return f"RPI 4 GB Available at {url}"
-    
+        return True
 
-def rpi8gb():
 
-    url = f"{baseurl}4564"
+def rpi8gb_isavailable():
+
+    url = RPI8GB_URL
     response = requests.get(url).content
 
     soup_html5lib = BeautifulSoup(response, "html5lib")
@@ -60,13 +64,23 @@ def rpi8gb():
     beautified = soup_html5lib.body.find_all(id="meta0_option_4564")
 
     if "Out of stock" not in beautified:
-        return "RPI 8 GB is out of stock"
+        return False
     else:
-        return f"RPI 8 GB Available at {url}"
-    
+        return True
+
     
 
 
 if __name__ == '__main__':
-rpi8gb()
-discord_push()
+    if rpi1gb_isavailable() == True:
+        discord_push(RPI8GB_URL, "4-1GB")
+        email_notif(RPI8GB_URL, "4-1GB")
+    if rpi2gb_isavailable() == True:
+        discord_push(RPI8GB_URL, "4-2GB")
+        email_notif(RPI8GB_URL, "4-2GB")
+    if rpi4gb_isavailable() == True:
+        discord_push(RPI8GB_URL, "4-4GB")
+        email_notif(RPI8GB_URL, "4-4GB")
+    if rpi8gb_isavailable() == True:
+        discord_push(RPI8GB_URL, "4-8GB")
+        email_notif(RPI8GB_URL, "4-8GB")                

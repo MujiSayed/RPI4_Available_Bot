@@ -1,19 +1,12 @@
 import requests
-import scraper
-import email_notif
 import config as conf
 
-product_found():
 
-
-
-
-def discord_push():
-    url = discord_webhook.conf 
-    #product_found = rpi8gb()
+def discord_push(product_url, rpi_name):
+    url = conf.discord_webhook 
     data = {
-    "content" : str(product_found),
-    "username" : discord_user.conf
+    "content" : f"RPI{rpi_name} found at {product_url}", 
+    "username" : conf.discord_user
     }
 
 
@@ -26,7 +19,3 @@ def discord_push():
     else:
         print("Payload delivered successfully, code {}.".format(result.status_code))
 
-
-if __name__ == '__main__':
-scraper()
-discord_push()

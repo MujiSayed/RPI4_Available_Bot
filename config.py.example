@@ -1,7 +1,13 @@
+#Discord
+--------------------
 discord_webhook = ""
 discord_user = ""
+--------------------
+#Email Settings
+--------------------
 to_address = ""
 email_user = ""
 email_pass = ""
-smtp_ssl_port = ""
 smtp_server = ""
+smtp_ssl_port = ""
+
