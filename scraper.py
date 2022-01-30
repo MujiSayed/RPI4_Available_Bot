@@ -9,7 +9,7 @@ RPI2GB_URL = f"{baseurl}4292"
 RPI4GB_URL = f"{baseurl}4296"
 RPI8GB_URL = f"{baseurl}4564"
 
-def rpi1gb():
+def rpi1gb_isavailable():
     
     url = f"{baseurl}4295"
     response = requests.get(url).content
@@ -24,7 +24,7 @@ def rpi1gb():
         return True
 
 
-def rpi2gb():
+def rpi2gb_isavailable():
     
     url = f"{baseurl}4292"
     response = requests.get(url).content
@@ -39,7 +39,7 @@ def rpi2gb():
         return True
 
 
-def rpi4gb():
+def rpi4gb_isavailable():
     
     url = f"{baseurl}4296"
     response = requests.get(url).content
