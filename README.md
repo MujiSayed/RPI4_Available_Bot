@@ -1,15 +1,16 @@
-You'd probably want to run this as a cronjob.
 
-check https://ostechnix.com/a-beginners-guide-to-cron-jobs/ for a beginner's guide
+A simple HTML parser that checks to see if the raspberry pi 4 is in stock at adafruit.com
 
-if your lazy and want to run this every 10 minutes:
 
-in Terminal:
-```Bash
-crontab -e
+
+To run this Bot, simply run the following commands:
+
 ```
-
-scroll down to the bottom and paste the following:
+apt-get install python3
+apt-get install python3-pip
+git clone https://git.mujisayed.com/basedmeezus/RPI4_Available_Bot.git
+cd RPI4_Available_Bot
+pip3 install -r requirements.txt
+python3 scraper.py
 ```
-*/5 * * * * /usr/bin/python3 /path/to/the/main.py
-```
+NOTE: This has only been tested on debian based systems
