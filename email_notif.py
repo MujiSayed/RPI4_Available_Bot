@@ -1,11 +1,16 @@
 import smtplib
 import config as conf
 from textwrap import dedent
+import numpy as np
 
 def email_notif(product_url, product_name):
+
+    if np.array(conf.to_address).size == 1:
+        To = conf.to_address
+    else:
+        To = ', '.join(conf.to_address)  
+
     From = conf.email_user
-    To = conf.to_address
-    print(To)
     Subject = f"RPI{product_name} available"
     Body = f"RPI{product_name} is now available at {product_url}"
     Msg = dedent(f"""

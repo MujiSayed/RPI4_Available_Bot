@@ -73,14 +73,14 @@ def rpi8gb_isavailable():
 
 if __name__ == '__main__':
     if rpi1gb_isavailable() == True:
-        discord_push(RPI1GB_URL, "4-1GB")
+        #discord_push(RPI1GB_URL, "4-1GB")
         email_notif(RPI1GB_URL, "4-1GB")
     if rpi2gb_isavailable() == True:
-        discord_push(RPI2GB_URL, "4-2GB")
+        #discord_push(RPI2GB_URL, "4-2GB")
         email_notif(RPI2GB_URL, "4-2GB")
     if rpi4gb_isavailable() == True:
-        discord_push(RPI4GB_URL, "4-4GB")
+        #discord_push(RPI4GB_URL, "4-4GB")
         email_notif(RPI4GB_URL, "4-4GB")
     if rpi8gb_isavailable() == True:
-        discord_push(RPI8GB_URL, "4-8GB")
+        #discord_push(RPI8GB_URL, "4-8GB")
         email_notif(RPI8GB_URL, "4-8GB")                
