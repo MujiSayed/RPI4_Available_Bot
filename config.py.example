@@ -13,3 +13,7 @@ smtp_ssl_port = ""
 --------------------
 interval = "300"
 --------------------
+#SMS Settings
+--------------------
+carrier = ""
+phone_number = ""

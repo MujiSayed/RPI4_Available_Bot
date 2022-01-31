@@ -2,7 +2,7 @@ import smtplib
 import config as conf
 from textwrap import dedent
 import numpy as np
-
+'''
 def email_notif(product_url, product_name):
 
     if conf.email_to != "" and conf.email_username != "":
@@ -34,3 +34,65 @@ def email_notif(product_url, product_name):
         
     else:
         print("No email sent")
+'''
+
+def sms_notif(product_url, product_name):
+    if conf.phone_number != "" and conf.carrier != "":
+
+        print(f"Sending SMS to {conf.phone_number}")
+
+        for carrier in conf.carrier:
+            if conf.carrier == "tmobile":
+                phone_number = conf.phone_number + "@tmomail.net"
+            elif:
+                if conf.carrier == "vmobile":
+                phone_number = conf.phone_number + "@vmobl.com"
+            elif:
+                if conf.carrier == "att":
+                phone_number = conf.phone_number + "@txt.att.net"
+            elif:
+                if conf.carrier == "sprint":
+                phone_number = conf.phone_number + "@messaging.sprintpcs.com"
+            elif:
+                if conf.carrier == "verizon":
+                phone_number = conf.phone_number + "@vtext.com"
+            elif:
+                if conf.carrier == "tracfone":
+                phone_number = conf.phone_number + "@mmst5.tracfone.com"
+            elif:
+                if conf.carrier == "ting":
+                phone_number = conf.phone_number + "@message.ting.com"
+            elif:
+                if conf.carrier == "boost":
+                phone_number = conf.phone_number + "@myboostmobile.com"
+            elif:
+                if conf.carrier == "usc":
+                phone_number = conf.phone_number + "@email.uscc.net"
+            elif:
+                if conf.carrier == "metro":
+                phone_number = conf.phone_number + "@mymetropcs.com"
+
+        print (phone_number)
+
+        From = conf.email_username
+        To = phone_number
+        Subject = f"RPI{product_name} available"
+        Body = f"RPI{product_name} is now available at {product_url}"
+        Msg = dedent(f"""
+        From: {From}
+        To: {To}
+        Subject: {Subject}
+        \n""") + Body
+        sms_msg = Msg.strip()
+
+        try:
+            server = smtplib.SMTP_SSL(conf.smtp_server, conf.smtp_ssl_port)
+            server.login(conf.email_username, conf.email_pass)
+            server.sendmail(From, To, sms_msg)
+            server.close()
+            print('SMS Text sent successfully')
+        except exception as e:
+            print("failed to send sms, check email settings", e)
+
+    else:
+        print("Phone or carrier not set")
