@@ -66,9 +66,9 @@ def rpi8gb_isavailable():
     beautified = soup_html5lib.body.find_all(id="meta0_option_4564")
 
     if "Out of stock" not in beautified:
-        return True
-    else:
         return False
+    else:
+        return True
 
     
 
@@ -84,8 +84,8 @@ if __name__ == '__main__':
         discord_push(RPI4GB_URL, "4-4GB")
         email_notif(RPI4GB_URL, "4-4GB")
     if rpi8gb_isavailable() == True:
-        #discord_push(RPI8GB_URL, "4-8GB")
-        #email_notif(RPI8GB_URL, "4-8GB")
-        #email_notif.sms_notif(RPI8GB_URL, "4-8GB")
-    #print(f"waiting {conf.interval} seconds before retrying")
-    #time.sleep(int(conf.interval))
+        discord_push(RPI8GB_URL, "4-8GB")
+        email_notif(RPI8GB_URL, "4-8GB")
+        email_notif.sms_notif(RPI8GB_URL, "4-8GB")
+    print(f"waiting {conf.interval} seconds before retrying")
+    time.sleep(int(conf.interval))
