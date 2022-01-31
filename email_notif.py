@@ -2,7 +2,7 @@ import smtplib
 import config as conf
 from textwrap import dedent
 import numpy as np
-'''
+
 def email_notif(product_url, product_name):
 
     if conf.email_to != "" and conf.email_username != "":
@@ -34,7 +34,7 @@ def email_notif(product_url, product_name):
         
     else:
         print("No email sent")
-'''
+
 
 def sms_notif(product_url, product_name):
     if conf.phone_number != "" and conf.carrier != "":
@@ -44,32 +44,23 @@ def sms_notif(product_url, product_name):
         for carrier in conf.carrier:
             if conf.carrier == "tmobile":
                 phone_number = conf.phone_number + "@tmomail.net"
-            elif:
-                if conf.carrier == "vmobile":
+            elif conf.carrier == "vmobile":
                 phone_number = conf.phone_number + "@vmobl.com"
-            elif:
-                if conf.carrier == "att":
+            elif conf.carrier == "att":
                 phone_number = conf.phone_number + "@txt.att.net"
-            elif:
-                if conf.carrier == "sprint":
+            elif conf.carrier == "sprint":
                 phone_number = conf.phone_number + "@messaging.sprintpcs.com"
-            elif:
-                if conf.carrier == "verizon":
+            elif conf.carrier == "verizon":
                 phone_number = conf.phone_number + "@vtext.com"
-            elif:
-                if conf.carrier == "tracfone":
+            elif conf.carrier == "tracfone":
                 phone_number = conf.phone_number + "@mmst5.tracfone.com"
-            elif:
-                if conf.carrier == "ting":
+            elif conf.carrier == "ting":
                 phone_number = conf.phone_number + "@message.ting.com"
-            elif:
-                if conf.carrier == "boost":
+            elif conf.carrier == "boost":
                 phone_number = conf.phone_number + "@myboostmobile.com"
-            elif:
-                if conf.carrier == "usc":
+            elif conf.carrier == "usc":
                 phone_number = conf.phone_number + "@email.uscc.net"
-            elif:
-                if conf.carrier == "metro":
+            elif conf.carrier == "metro":
                 phone_number = conf.phone_number + "@mymetropcs.com"
 
         print (phone_number)
@@ -91,7 +82,7 @@ def sms_notif(product_url, product_name):
             server.sendmail(From, To, sms_msg)
             server.close()
             print('SMS Text sent successfully')
-        except exception as e:
+        except Exception as e:
             print("failed to send sms, check email settings", e)
 
     else:

@@ -1,3 +1,4 @@
-*.git
+.git
 config.py
 __pycache__/
+Dockerfile
