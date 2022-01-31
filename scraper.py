@@ -66,9 +66,9 @@ def rpi8gb_isavailable():
     beautified = soup_html5lib.body.find_all(id="meta0_option_4564")
 
     if "Out of stock" not in beautified:
-        return True
-    else:
         return False
+    else:
+        return True
 
     
 
