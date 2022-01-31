@@ -14,3 +14,18 @@ pip3 install -r requirements.txt
 python3 scraper.py
 ```
 NOTE: This has only been tested on debian based systems
+
+
+
+SMS Carrier Settings:
+
+    T-Mobile --- tmobile
+    Virgin Mobile --- vmobile
+    AT&T --- att
+    Sprint --- sprint
+    Verizon --- verizon
+    Tracfone --- tracfone
+    Ting --- ting
+    Boost Mobile --- boost
+    U.S. Cellular --- usc
+    Metro PCS --- metro
