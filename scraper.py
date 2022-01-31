@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 from discord_notif import discord_push
 from email_notif import email_notif
+import config as conf
+import time
 
 baseurl = "https://www.adafruit.com/product/"
 RPI1GB_URL = f"{baseurl}4295"
@@ -64,23 +66,25 @@ def rpi8gb_isavailable():
     beautified = soup_html5lib.body.find_all(id="meta0_option_4564")
 
     if "Out of stock" not in beautified:
-        return True
-    else:
         return False
+    else:
+        return True
 
     
 
 
-if __name__ == '__main__':
+while __name__ == '__main__':
     if rpi1gb_isavailable() == True:
-        #discord_push(RPI1GB_URL, "4-1GB")
+        discord_push(RPI1GB_URL, "4-1GB")
         email_notif(RPI1GB_URL, "4-1GB")
     if rpi2gb_isavailable() == True:
-        #discord_push(RPI2GB_URL, "4-2GB")
+        discord_push(RPI2GB_URL, "4-2GB")
         email_notif(RPI2GB_URL, "4-2GB")
     if rpi4gb_isavailable() == True:
-        #discord_push(RPI4GB_URL, "4-4GB")
+        discord_push(RPI4GB_URL, "4-4GB")
         email_notif(RPI4GB_URL, "4-4GB")
     if rpi8gb_isavailable() == True:
-        #discord_push(RPI8GB_URL, "4-8GB")
-        email_notif(RPI8GB_URL, "4-8GB")                
+        discord_push(RPI8GB_URL, "4-8GB")
+        email_notif(RPI8GB_URL, "4-8GB")
+    print(f"waiting {conf.interval} seconds before retrying")
+    time.sleep(int(conf.interval))

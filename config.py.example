@@ -5,9 +5,11 @@ discord_user = ""
 --------------------
 #Email Settings
 --------------------
-to_address = ""
-email_user = ""
+email_to = ""
+email_username = ""
 email_pass = ""
 smtp_server = ""
 smtp_ssl_port = ""
-
+--------------------
+interval = "300"
+--------------------
