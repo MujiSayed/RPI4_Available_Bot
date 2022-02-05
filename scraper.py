@@ -4,6 +4,7 @@ from discord_notif import discord_push
 import email_notif
 import config as conf
 import time
+import os
 
 baseurl = "https://www.adafruit.com/product/"
 RPI1GB_URL = f"{baseurl}4295"
@@ -66,9 +67,9 @@ def rpi8gb_isavailable():
     beautified = soup_html5lib.body.find_all(id="meta0_option_4564")
 
     if "Out of stock" not in beautified:
-        return False
-    else:
         return True
+    else:
+        return False
 
     
 

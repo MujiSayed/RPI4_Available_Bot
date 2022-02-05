@@ -63,8 +63,6 @@ def sms_notif(product_url, product_name):
             elif conf.carrier == "metro":
                 phone_number = conf.phone_number + "@mymetropcs.com"
 
-        print (phone_number)
-
         From = conf.email_username
         To = phone_number
         Subject = f"RPI{product_name} available"
