@@ -38,8 +38,6 @@ volumes:
 - name: dockersock
   temp: {}
 
-
-
 ---
 
 kind: pipeline
@@ -58,7 +56,7 @@ steps:
   - docker run --privileged --rm tonistiigi/binfmt --install all
 
 
-- name: publish  
+- name: build & publish  
   image: plugins/docker
   privileged: true
   settings:
@@ -66,7 +64,7 @@ steps:
     auto_tag: true
     auto_tag_suffix: drone-arm
     platforms: 
-      - linux/arm64/v8
+      - linux/amd64
     username:
       from_secret: DOCKER_USERNAME
     password:
