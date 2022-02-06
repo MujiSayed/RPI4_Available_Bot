@@ -19,7 +19,7 @@ steps:
     repo: basedmeezus/rpi_availibility_bot
     auto_tag: true
     auto_tag_suffix: drone-arm64
-    platforms: 64
+    platforms:
       - linux/arm64
       - linux/arm
     username:
