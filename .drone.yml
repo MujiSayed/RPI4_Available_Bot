@@ -47,7 +47,7 @@ name: AMD64
 steps:
 
 - name: start docker
-  image: plugins/docker
+  image: docker:dind
   volumes:
   - name: dockersock
     path: /var/run
