@@ -1,6 +1,6 @@
 kind: pipeline
 type: kubernetes
-name: amd64
+name: arm64
 
 steps:
 - name: start_docker
@@ -18,6 +18,7 @@ steps:
   settings:
     repo: basedmeezus/rpi_availibility_bot
     auto_tag: true
+    auto_tag_suffix: drone-arm
     platforms: 
       - linux/arm64/v8
     username:
@@ -43,11 +44,7 @@ volumes:
 
 kind: pipeline
 type: kubernetes
-name: arm64
-
-platform:
-  os: linux
-  arch: amd64
+name: AMD64
 
 steps:
 
@@ -68,6 +65,8 @@ steps:
     repo: basedmeezus/rpi_availibility_bot
     auto_tag: true
     auto_tag_suffix: drone-arm
+        platforms: 
+      - linux/arm64/v8
     username:
       from_secret: DOCKER_USERNAME
     password:
