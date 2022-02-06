@@ -46,7 +46,7 @@ volumes:
 
 kind: pipeline
 type: kubernetes
-name: Build & Publish ARM
+name: Build & Publish ARM32
 
 steps:
 
@@ -139,3 +139,24 @@ volumes:
   temp: {}
 
 
+---
+kind: pipeline
+type: kubernetes
+name: manifest
+
+steps:
+- name: manifest
+  image: plugins/manifest
+  settings:
+    spec: manifest.tmpl
+    auto_tag: true
+    ignore_missing: true
+    password:
+      from_secret: DOCKER_PASSWORD
+    username:
+      from_secret: DOCKER_USERNAME
+
+depends_on:
+- Build & Publish ARM64
+- Build & Publish ARM32
+- Build & Publish AMD64
