@@ -27,7 +27,6 @@ steps:
     password:
       from_secret: DOCKER_PASSWORD
 
-steps:
 - name: manifest
   image: plugins/manifest
   settings:
@@ -89,7 +88,6 @@ steps:
      - ARCH=amd64
      - REPO=amd64
 
-steps:
 - name: manifest
   image: plugins/manifest
   settings:
