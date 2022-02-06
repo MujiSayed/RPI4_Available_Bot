@@ -62,7 +62,7 @@ steps:
 
 
 - name: publish  
-  image: thegeeklab/drone-docker-buildx:latest
+  image: plugins/docker
   privileged: true
   settings:
     repo: basedmeezus/rpi_availibility_bot
