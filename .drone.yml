@@ -1,10 +1,11 @@
 kind: pipeline
 type: kubernetes
-name: Build & Publish arm64
+name: Build & Publish ARM64
 
 steps:
 - name: start_docker
   image: docker:dind
+  pull: if-not-exists
   volumes:
   - name: dockersock
     path: /var/run
@@ -14,32 +15,18 @@ steps:
 
 - name: publish  
   image: thegeeklab/drone-docker-buildx:latest
+  pull: if-not-exists
   privileged: true
   settings:
     repo: basedmeezus/rpi_availibility_bot
     auto_tag: true
-    auto_tag_suffix: drone-arm64
+    auto_tag_suffix: linux-arm64
     platforms:
       - linux/arm64
-      - linux/arm
     username:
       from_secret: DOCKER_USERNAME
     password:
       from_secret: DOCKER_PASSWORD
-
-- name: manifest
-  image: plugins/manifest
-  settings:
-    username:
-      from_secret: DOCKER_USERNAME
-    password:
-      from_secret: DOCKER_PASSWORD
-    target: basedmeezus/rpi_availibility_bot:v1.0.0
-    template: basedmeezus/rpi_availibility_bot:v1.0.0-OS-ARCH
-    platforms:
-      - linux/arm
-      - linux/arm64
-
 
 services:
 - name: docker
@@ -53,16 +40,19 @@ volumes:
 - name: dockersock
   temp: {}
 
+
+
 ---
 
 kind: pipeline
 type: kubernetes
-name: Build & Publish AMD64
+name: Build & Publish ARM
 
 steps:
 
 - name: start docker
   image: docker:dind
+  pull: if-not-exists
   volumes:
   - name: dockersock
     path: /var/run
@@ -73,32 +63,68 @@ steps:
 
 - name: build & publish  
   image: thegeeklab/drone-docker-buildx:latest
+  pull: if-not-exists
   privileged: true
   settings:
     repo: basedmeezus/rpi_availibility_bot
     auto_tag: true
-    auto_tag_suffix: drone-amd64
+    auto_tag_suffix: linux-arm
+    platforms: 
+      - linux/arm
+    username:
+      from_secret: DOCKER_USERNAME
+    password:
+      from_secret: DOCKER_PASSWORD
+
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+volumes:
+- name: dockersock
+  temp: {}
+
+
+
+
+---
+
+kind: pipeline
+type: kubernetes
+name: Build & Publish AMD64
+
+steps:
+
+- name: start docker
+  image: docker:dind
+  pull: if-not-exists
+  volumes:
+  - name: dockersock
+    path: /var/run
+  commands:
+  - sleep 50 # give docker enough time to start
+  - docker run --privileged --rm tonistiigi/binfmt --install all
+
+
+- name: build & publish  
+  image: thegeeklab/drone-docker-buildx:latest
+  pull: if-not-exists
+  privileged: true
+  settings:
+    repo: basedmeezus/rpi_availibility_bot
+    auto_tag: true
+    auto_tag_suffix: linux-amd64
     platforms: 
       - linux/amd64
     username:
       from_secret: DOCKER_USERNAME
     password:
       from_secret: DOCKER_PASSWORD
-    build_args:
-     - ARCH=amd64
-     - REPO=amd64
 
-- name: manifest
-  image: plugins/manifest
-  settings:
-    username:
-      from_secret: DOCKER_USERNAME
-    password:
-      from_secret: DOCKER_PASSWORD
-    target: basedmeezus/rpi_availibility_bot:v1.0.0
-    template: basedmeezus/rpi_availibility_bot:v1.0.0-OS-ARCH
-    platforms:
-      - linux/amd64
 
 services:
 - name: docker
