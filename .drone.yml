@@ -1,6 +1,6 @@
 kind: pipeline
 type: kubernetes
-name: default
+name: arm64
 
 steps:
 - name: start_docker
@@ -41,7 +41,7 @@ volumes:
 
 kind: pipeline
 type: kubernetes
-name: default
+name: amd64
 
 steps:
 - name: start_docker
