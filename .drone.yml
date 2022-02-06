@@ -1,46 +1,5 @@
 kind: pipeline
 type: kubernetes
-name: arm64
-
-steps:
-- name: start_docker
-  image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run
-  commands:
-  - sleep 50 # give docker enough time to start
-  - docker run --privileged --rm tonistiigi/binfmt --install all
-
-- name: publish  
-  image: thegeeklab/drone-docker-buildx:latest
-  privileged: true
-  settings:
-    repo: basedmeezus/rpi_availibility_bot
-    tags: auto_tag
-    platforms: 
-      - linux/arm64/v8
-    username:
-      from_secret: DOCKER_USERNAME
-    password:
-      from_secret: DOCKER_PASSWORD
-
-services:
-- name: docker
-  image: docker:dind
-  privileged: true
-  volumes:
-  - name: dockersock
-    path: /var/run
-
-volumes:
-- name: dockersock
-  temp: {}
-
----
-
-kind: pipeline
-type: kubernetes
 name: amd64
 
 steps:
@@ -58,7 +17,7 @@ steps:
   privileged: true
   settings:
     repo: basedmeezus/rpi_availibility_bot
-    tags: auto_tag
+    auto_tag: true
     platforms: 
       - linux/amd64
     username:
@@ -77,3 +36,30 @@ services:
 volumes:
 - name: dockersock
   temp: {}
+
+
+
+---
+
+kind: pipeline
+name: arm64
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+
+- name: build arm64
+  image: plugins/docker
+  commands:
+  - sleep 50 # give docker enough time to start
+  - docker run --privileged --rm tonistiigi/binfmt --install all
+  settings:
+    repo: basedmeezus/rpi_availibility_bot
+    auto_tag: true
+    auto_tag_suffix: drone-arm
+    username:
+      from_secret: DOCKER_USERNAME
+    password:
+      from_secret: DOCKER_PASSWORD
