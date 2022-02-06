@@ -1,6 +1,6 @@
 kind: pipeline
 type: kubernetes
-name: arm64
+name: Build & Publish arm64
 
 steps:
 - name: start_docker
@@ -20,11 +20,27 @@ steps:
     auto_tag: true
     auto_tag_suffix: drone-arm64
     platforms: 64
-      - linux/arm64/v8
+      - linux/arm64
+      - linux/arm
     username:
       from_secret: DOCKER_USERNAME
     password:
       from_secret: DOCKER_PASSWORD
+
+steps:
+- name: manifest
+  image: plugins/manifest
+  settings:
+    username:
+      from_secret: DOCKER_USERNAME
+    password:
+      from_secret: DOCKER_PASSWORD
+    target: basedmeezus/rpi_availibility_bot:v1.0.0
+    template: basedmeezus/rpi_availibility_bot:v1.0.0-OS-ARCH
+    platforms:
+      - linux/arm
+      - linux/arm64
+
 
 services:
 - name: docker
@@ -42,7 +58,7 @@ volumes:
 
 kind: pipeline
 type: kubernetes
-name: AMD64
+name: Build & Publish AMD64
 
 steps:
 
@@ -57,7 +73,7 @@ steps:
 
 
 - name: build & publish  
-  image: plugins/docker
+  image: thegeeklab/drone-docker-buildx:latest
   privileged: true
   settings:
     repo: basedmeezus/rpi_availibility_bot
@@ -73,6 +89,18 @@ steps:
      - ARCH=amd64
      - REPO=amd64
 
+steps:
+- name: manifest
+  image: plugins/manifest
+  settings:
+    username:
+      from_secret: DOCKER_USERNAME
+    password:
+      from_secret: DOCKER_PASSWORD
+    target: basedmeezus/rpi_availibility_bot:v1.0.0
+    template: basedmeezus/rpi_availibility_bot:v1.0.0-OS-ARCH
+    platforms:
+      - linux/amd64
 
 services:
 - name: docker
@@ -85,3 +113,5 @@ services:
 volumes:
 - name: dockersock
   temp: {}
+
+
