@@ -17,7 +17,7 @@ steps:
   privileged: true
   settings:
     repo: basedmeezus/rpi_availibility_bot
-    tags: latest
+    tags: auto_tag
     platforms: 
       - linux/arm64/v8
     username:
@@ -58,7 +58,7 @@ steps:
   privileged: true
   settings:
     repo: basedmeezus/rpi_availibility_bot
-    tags: latest
+    tags: auto_tag
     platforms: 
       - linux/amd64
     username:
