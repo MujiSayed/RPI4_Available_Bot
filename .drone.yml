@@ -42,6 +42,7 @@ volumes:
 ---
 
 kind: pipeline
+type: kubernetes
 name: arm64
 
 platform:
