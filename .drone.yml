@@ -65,7 +65,7 @@ steps:
     repo: basedmeezus/rpi_availibility_bot
     auto_tag: true
     auto_tag_suffix: drone-arm
-        platforms: 
+    platforms: 
       - linux/arm64/v8
     username:
       from_secret: DOCKER_USERNAME
