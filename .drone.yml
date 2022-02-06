@@ -52,6 +52,9 @@ steps:
 
 - name: build arm64
   image: plugins/docker
+  volumes:
+  - name: dockersock
+    path: /var/run
   commands:
   - sleep 50 # give docker enough time to start
   - docker run --privileged --rm tonistiigi/binfmt --install all
@@ -63,3 +66,16 @@ steps:
       from_secret: DOCKER_USERNAME
     password:
       from_secret: DOCKER_PASSWORD
+
+
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+volumes:
+- name: dockersock
+  temp: {}
