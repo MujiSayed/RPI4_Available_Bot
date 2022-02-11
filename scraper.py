@@ -74,19 +74,31 @@ def rpi8gb_isavailable():
     
 
 
-if __name__ == '__main__':
+while __name__ == '__main__':
     if rpi1gb_isavailable() == True:
         discord_push(RPI1GB_URL, "4-1GB")
         email_notif.email_notif(RPI1GB_URL, "4-1GB")
+        print("RPI-4 1GB is available")
+    else:
+        print("RPI-4 1GB is not available")
     if rpi2gb_isavailable() == True:
         discord_push(RPI2GB_URL, "4-2GB")
         email_notif.email_notif(RPI2GB_URL, "4-2GB")
+        print("RPI-4 2GB is available")
+    else:
+        print("RPI-4 2GB is not available")        
     if rpi4gb_isavailable() == True:
         discord_push(RPI4GB_URL, "4-4GB")
         email_notif.email_notif(RPI4GB_URL, "4-4GB")
+        print("RPI-4 4GB is available")
+    else:
+        print("RPI-4 4GB is not available")        
     if rpi8gb_isavailable() == True:
         discord_push(RPI8GB_URL, "4-8GB")
         email_notif.email_notif(RPI8GB_URL, "4-8GB")
         email_notif.sms_notif(RPI8GB_URL, "4-8GB")
+        print("RPI-4 8GB is available")
+    else:
+        print("RPI-4 8GB is not available")        
     print(f"waiting {conf.interval} seconds before retrying")
     time.sleep(int(conf.interval))
