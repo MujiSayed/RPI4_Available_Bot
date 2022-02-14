@@ -16,7 +16,7 @@ steps:
   image: plugins/docker
   pull: if-not-exists
   settings:
-    repo: basedmeezus/rpi_availibility_bot
+    repo: basedmeezus/drone_testing
     auto_tag: true
     auto_tag_suffix: linux-arm64
     username:
@@ -44,7 +44,7 @@ steps:
   image: plugins/docker
   pull: if-not-exists
   settings:
-    repo: basedmeezus/rpi_availibility_bot
+    repo: basedmeezus/drone_testing
     auto_tag: true
     auto_tag_suffix: linux-amd64
     username:
