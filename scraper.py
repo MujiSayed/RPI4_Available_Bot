@@ -14,12 +14,13 @@ RPI8GB_URL = f"{baseurl}4564"
 
 def rpi1gb_isavailable():
     
-    url = f"{baseurl}4295"
+    url = RPI1GB_URL
     response = requests.get(url).content
 
     soup_html5lib = BeautifulSoup(response, "html5lib")
 
     beautified = soup_html5lib.body.find_all(id="meta0_option_4295")
+    print("Web response for check: ", requests.get(url).status_code)
 
     if "Out of stock" not in beautified:
         return False
@@ -29,12 +30,13 @@ def rpi1gb_isavailable():
 
 def rpi2gb_isavailable():
     
-    url = f"{baseurl}4292"
+    url = RPI2GB_URL
     response = requests.get(url).content
 
     soup_html5lib = BeautifulSoup(response, "html5lib")
 
     beautified = soup_html5lib.body.find_all(id="meta0_option_4292")
+    print("Web response for check: ", requests.get(url).status_code)
 
     if "Out of stock" not in beautified:
         return False
@@ -44,12 +46,13 @@ def rpi2gb_isavailable():
 
 def rpi4gb_isavailable():
     
-    url = f"{baseurl}4296"
+    url = RPI4GB_URL
     response = requests.get(url).content
 
     soup_html5lib = BeautifulSoup(response, "html5lib")
 
     beautified = soup_html5lib.body.find_all(id="meta0_option_4296")
+    print("Web response for check: ", requests.get(url).status_code)
 
     if "Out of stock" not in beautified:
         return False
@@ -65,6 +68,7 @@ def rpi8gb_isavailable():
     soup_html5lib = BeautifulSoup(response, "html5lib")
 
     beautified = soup_html5lib.body.find_all(id="meta0_option_4564")
+    print("Web response for check: ", requests.get(url).status_code)
 
     if "Out of stock" not in beautified:
         return False
@@ -78,18 +82,21 @@ while __name__ == '__main__':
     if rpi1gb_isavailable() == True:
         discord_push(RPI1GB_URL, "4-1GB")
         email_notif.email_notif(RPI1GB_URL, "4-1GB")
+        email_notif.sms_notif(RPI8GB_URL, "4-1GB")
         print("RPI-4 1GB is available")
     else:
         print("RPI-4 1GB is not available")
     if rpi2gb_isavailable() == True:
         discord_push(RPI2GB_URL, "4-2GB")
         email_notif.email_notif(RPI2GB_URL, "4-2GB")
+        email_notif.sms_notif(RPI8GB_URL, "4-2GB")
         print("RPI-4 2GB is available")
     else:
         print("RPI-4 2GB is not available")        
     if rpi4gb_isavailable() == True:
         discord_push(RPI4GB_URL, "4-4GB")
         email_notif.email_notif(RPI4GB_URL, "4-4GB")
+        email_notif.sms_notif(RPI8GB_URL, "4-4GB")
         print("RPI-4 4GB is available")
     else:
         print("RPI-4 4GB is not available")        
