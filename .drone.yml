@@ -1,10 +1,10 @@
 kind: pipeline
 type: kubernetes
-name: Build & Publish ARM64
+name: Build & Publish AMD64
 
 platform:
+  arch: amd64
   os: linux
-  arch: arm64
 
 trigger:
   event:
@@ -14,7 +14,34 @@ trigger:
 steps:
 - name: publish  
   image: plugins/docker
-  pull: if-not-exists
+  pull: always
+  settings:
+    repo: basedmeezus/drone_testing
+    auto_tag: true
+    auto_tag_suffix: linux-amd64
+    username:
+      from_secret: DOCKER_USERNAME
+    password:
+      from_secret: DOCKER_PASSWORD
+---
+
+kind: pipeline
+type: kubernetes
+name: Build & Publish ARM64
+
+platform:
+  arch: arm64
+  os: linux
+
+trigger:
+  event:
+    - push
+    - tag
+    - pull_request
+steps:
+- name: publish  
+  image: plugins/docker
+  pull: always
   settings:
     repo: basedmeezus/drone_testing
     auto_tag: true
@@ -25,29 +52,22 @@ steps:
       from_secret: DOCKER_PASSWORD
 
 ---
-
 kind: pipeline
 type: kubernetes
-name: Build & Publish AMD64
+name: manifest
 
-platform:
-  os: linux
-  arch: amd64
-
-trigger:
-  event:
-    - push
-    - tag
-    - pull_request
 steps:
-- name: publish  
-  image: plugins/docker
-  pull: if-not-exists
+- name: manifest
+  image: plugins/manifest
   settings:
-    repo: basedmeezus/drone_testing
+    spec: manifest.tmpl
     auto_tag: true
-    auto_tag_suffix: linux-amd64
-    username:
-      from_secret: DOCKER_USERNAME
+    ignore_missing: true
     password:
       from_secret: DOCKER_PASSWORD
+    username:
+      from_secret: DOCKER_USERNAME
+
+depends_on:
+- Build & Publish AMD64
+- Build & Publish ARM64
