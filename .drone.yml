@@ -6,12 +6,6 @@ platform:
   os: linux
   arch: arm64
 
-trigger:
-  event:
-    - push
-    - tag
-    - pull_request
-
 - name: publish  
   image: plugins/docker:linux-arm64
   pull: if-not-exists
@@ -33,12 +27,6 @@ name: Build & Publish AMD64
 platform:
   os: linux
   arch: amd64
-
-trigger:
-  event:
-    - push
-    - tag
-    - pull_request
 
 - name: publish  
   image: plugins/docker:amd64
